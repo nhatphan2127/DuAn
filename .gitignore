@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+
+# Virtual env (uv)
+.venv/
+
+# Model checkpoints (hàng trăm MB - GB, vượt giới hạn GitHub)
+*.pt
+*.pth
+*.bin
+*.safetensors
+**/checkpoints/
+
+# Dữ liệu train lớn (train.vi ~113MB > giới hạn 100MB của GitHub)
+data/train.*
+
+# Logs tạm
+*.log
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+
+# Thư mục model đã train (checkpoint, tokenizer, log, kết quả)
+vi_zh_bidir/
+vi_zh_translation/
+zh_vi_translation/
+
+# Tài liệu markdown nội bộ, chỉ giữ README
+*.md
+!README.md
