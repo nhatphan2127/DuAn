@@ -1,9 +1,9 @@
 """Dịch câu Việt <-> Trung bằng best checkpoint.
 
 Trên Colab:
-    !python translate.py "Tôi thích học trí tuệ nhân tạo." "Hôm nay trời đẹp."
-    !python translate.py --direction zh-vi "我喜欢学习人工智能。"
-    !python translate.py --direction both "Hôm nay trời đẹp." "我喜欢学习人工智能。"   # tự nhận ngôn ngữ
+    !python scripts/translate.py "Tôi thích học trí tuệ nhân tạo." "Hôm nay trời đẹp."
+    !python scripts/translate.py --direction zh-vi "我喜欢学习人工智能。"
+    !python scripts/translate.py --direction both "Hôm nay trời đẹp." "我喜欢学习人工智能。"   # tự nhận ngôn ngữ
 
 Hoặc trong một cell notebook (không cần load lại model mỗi lần):
     from translate import Translator
@@ -11,6 +11,11 @@ Hoặc trong một cell notebook (không cần load lại model mỗi lần):
     t("Tôi thích học trí tuệ nhân tạo.")          # -> tiếng Trung
     t("我喜欢学习人工智能。")                       # -> tiếng Việt
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # để import được nmt/ khi chạy scripts/*.py
+
 import argparse
 import re
 

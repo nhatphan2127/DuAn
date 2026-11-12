@@ -1,13 +1,17 @@
 """Vẽ biểu đồ quá trình huấn luyện từ training_metrics.json và train_log.jsonl.
 
-    uv run --with matplotlib python plot_metrics.py
-    !python plot_metrics.py                       # Colab có sẵn matplotlib
+    uv run --with matplotlib python scripts/plot_metrics.py
+    !python scripts/plot_metrics.py                       # Colab có sẵn matplotlib
 
 Ghi ra <base_dir>/figures/: loss.png, bleu_chrf.png, lr_schedule.png
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # để import được nmt/ khi chạy scripts/*.py
+
 import argparse
 import json
-from pathlib import Path
 
 import matplotlib
 

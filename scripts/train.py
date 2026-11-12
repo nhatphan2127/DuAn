@@ -1,10 +1,10 @@
 """Huấn luyện mô hình dịch Việt <-> Trung.
 
 Trên Colab:
-    !python train.py                                   # Việt -> Trung, lưu vào ./vi_zh_translation
-    !python train.py --direction zh-vi                 # Trung -> Việt, lưu vào ./zh_vi_translation
-    !python train.py --direction both                  # một mô hình hai chiều, lưu vào ./vi_zh_bidir
-    !python train.py --epochs 30 --max_tokens 8192     # override cấu hình
+    !python scripts/train.py                                   # Việt -> Trung, lưu vào ./vi_zh_translation
+    !python scripts/train.py --direction zh-vi                 # Trung -> Việt, lưu vào ./zh_vi_translation
+    !python scripts/train.py --direction both                  # một mô hình hai chiều, lưu vào ./vi_zh_bidir
+    !python scripts/train.py --epochs 30 --max_tokens 8192     # override cấu hình
 
 Kết quả ghi lại trong base_dir:
     config.json            config của lần chạy gần nhất
@@ -12,6 +12,9 @@ Kết quả ghi lại trong base_dir:
     training_metrics.json  metric theo từng epoch
 """
 import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # để import được nmt/ khi chạy scripts/*.py
 
 import torch
 

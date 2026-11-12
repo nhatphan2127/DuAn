@@ -3,15 +3,19 @@
 Mô hình hai chiều được đánh giá riêng từng chiều.
 
 Trên Colab:
-    !python evaluate.py                                # mô hình Việt -> Trung, beam search k=5
-    !python evaluate.py --direction zh-vi              # mô hình Trung -> Việt
-    !python evaluate.py --direction both               # mô hình hai chiều, chấm cả hai chiều
-    !python evaluate.py --split val --beam_size 1
-    !python evaluate.py --comet_model ''               # bỏ qua COMET
+    !python scripts/evaluate.py                                # mô hình Việt -> Trung, beam search k=5
+    !python scripts/evaluate.py --direction zh-vi              # mô hình Trung -> Việt
+    !python scripts/evaluate.py --direction both               # mô hình hai chiều, chấm cả hai chiều
+    !python scripts/evaluate.py --split val --beam_size 1
+    !python scripts/evaluate.py --comet_model ''               # bỏ qua COMET
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # để import được nmt/ khi chạy scripts/*.py
+
 import argparse
 import gc
-from pathlib import Path
 
 import torch
 

@@ -7,16 +7,20 @@ NLLB dịch thẳng (zero-shot) do nhóm B chạy; truyền file bản dịch đ
 paired bootstrap pivot so với dịch thẳng. --modes direct pivot thì script tự dịch thẳng để đối chứng.
 
 Ví dụ:
-    python pivot_nllb.py                                  # cả hai chiều, pivot, beam k=5
-    python pivot_nllb.py --compare vi-zh=zs/test.zh zh-vi=zs/test.vi   # + kiểm định với bản zero-shot
-    python pivot_nllb.py --num_samples 50 --comet_model ''  # chạy thử nhanh
-    python pivot_nllb.py --model ./nllb_finetuned         # pivot bằng NLLB đã fine-tune (đo mức "quên" tiếng Anh)
+    python scripts/pivot_nllb.py                                  # cả hai chiều, pivot, beam k=5
+    python scripts/pivot_nllb.py --compare vi-zh=zs/test.zh zh-vi=zs/test.vi   # + kiểm định với bản zero-shot
+    python scripts/pivot_nllb.py --num_samples 50 --comet_model ''  # chạy thử nhanh
+    python scripts/pivot_nllb.py --model ./nllb_finetuned         # pivot bằng NLLB đã fine-tune (đo mức "quên" tiếng Anh)
 
 Bản dịch đã có trong --out_dir được dùng lại (chạy tiếp được khi bị ngắt); --overwrite để dịch lại.
 """
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))  # để import được nmt/ khi chạy scripts/*.py
+
 import argparse
 import gc
-from pathlib import Path
 
 import torch
 from sacrebleu.metrics import BLEU, CHRF
