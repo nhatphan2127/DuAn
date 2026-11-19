@@ -1,0 +1,10 @@
+# Candidate exact top-level pins; NOT a verified transitive lock.
+# Colab runtime/CUDA compatibility remains WAITING_FOR_COLAB.
+# Probe stock torch/CUDA first; restart runtime after changing packages.
+torch==2.8.0
+transformers==4.57.1
+datasets==4.2.0
+accelerate==1.10.1
+peft==0.17.1
+sentencepiece==0.2.1
+sacrebleu==2.5.1
