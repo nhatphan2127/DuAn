@@ -1,0 +1,20 @@
+{
+  "run_label": "20261016",
+  "semantic_review": "not_performed_user_requested_technical_only",
+  "snapshot_root": "data/snapshots/20261016",
+  "work_root": "data/rebuild_20261016",
+  "evidence_root": "reports/data_freeze_20261016",
+  "raw_root": "data/raw",
+  "legacy_processed": "data/processed",
+  "legacy_final": "data/final",
+  "benchmark_root": "data/benchmark",
+  "opencc_resources": "data_pipeline/resources/opencc/1.1.7",
+  "seed": 42,
+  "sample_size": 1000000,
+  "validation_size": 5000,
+  "test_size": 5000,
+  "python_version": "3.12.14",
+  "normalization": "NFC + whitespace collapse; ZH t2s fixed point, max 8 passes, fail on cycle; comparison lower + NFC",
+  "control_filter": "Reject whole pair if U+0000-U+0008, U+000E-U+001F or U+007F survives T04 regex cleaning",
+  "packages": {"opencc": "1.1.7", "fasttext-wheel": "0.9.2", "numpy": "1.26.4"}
+}
