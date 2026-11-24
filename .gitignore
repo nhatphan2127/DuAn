@@ -56,3 +56,6 @@ Thumbs.db
 # Tài liệu markdown nội bộ, chỉ giữ README
 *.md
 !README.md
+
+# Adapter LoRA tải bằng scripts/download_assets.py --only lora
+nllb_lora/adapter/

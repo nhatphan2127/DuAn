@@ -57,6 +57,7 @@ Checkpoint baseline (241 MB) và `data/train.*` (113 MB + 73 MB) vượt giới 
 
 - Model: [nhatpha/vi-zh-transformer-baseline](https://huggingface.co/nhatpha/vi-zh-transformer-baseline)
 - Dữ liệu train: [nhatpha/vi-zh-parallel-20261016](https://huggingface.co/datasets/nhatpha/vi-zh-parallel-20261016)
+- Adapter LoRA chung hai chiều (công khai, khoảng 47 MB): [nhonguyen25/nllb-600m-vi-zh-lora](https://huggingface.co/nhonguyen25/nllb-600m-vi-zh-lora)
 
 ```bash
 python scripts/download_assets.py                    # cả checkpoint và dữ liệu
@@ -107,7 +108,14 @@ Mở http://127.0.0.1:8000. Giao diện có ba chức năng: dịch (tự nhận
 | `--local-files-only` | không tải NLLB từ mạng, chỉ dùng cache |
 | `--host 0.0.0.0 --port 8000` | cho máy khác trong mạng LAN truy cập |
 
-Adapter LoRA không có trong repo (là đầu ra của notebook huấn luyện trên Google Drive). Thiếu adapter thì app vẫn chạy với ba mô hình còn lại. Chi tiết API và cấu trúc: [app/README.md](app/README.md).
+Adapter LoRA không nằm trong git; tải từ [Hugging Face](https://huggingface.co/nhonguyen25/nllb-600m-vi-zh-lora) (revision ghim, kiểm SHA-256 từng file) rồi truyền cho app:
+
+```bash
+python scripts/download_assets.py --only lora      # tạo nllb_lora/adapter/
+.venv-lora/bin/python -m app.server --lora-adapter nllb_lora/adapter
+```
+
+Adapter dùng giấy phép CC-BY-NC 4.0 như NLLB-200: chỉ dùng cho nghiên cứu và học tập, không dùng thương mại. Thiếu adapter thì app vẫn chạy với ba mô hình còn lại. Chi tiết API và cấu trúc: [app/README.md](app/README.md).
 
 ## 3. Dịch bằng dòng lệnh (baseline)
 

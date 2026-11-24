@@ -13,7 +13,7 @@ Mã dựng lại và kiểm tra tập dữ liệu song song Hoa–Việt dùng �
 - Python **3.12.14** (`rebuild_dataset.py` kiểm đúng phiên bản và các gói ở `configs/data_freeze.json`: `opencc==1.1.7`, `fasttext-wheel==0.9.2`, `numpy==1.26.4`).
 - `requirements.pins` liệt kê phiên bản; `requirements.lock` thêm hash cho cài đặt có kiểm hash (`pip install --require-hashes -r data_pipeline/requirements.lock`). Nên dùng một venv riêng.
 - `setup_environment.ps1` dựng venv offline từ `data/tools/python-base.zip` và `data/tools/wheelhouse` cùng các file bằng chứng trong `reports/data_freeze_20261016/`. Các thứ đó **không nằm trong repo**, nên script này chỉ chạy được trên máy đã có chúng.
-- `resources/opencc/1.1.7/` là bảng chuyển phồn–giản (t2s) cố định, kèm `checksums.json`.
+- `resources/opencc/1.1.7/` là bảng chuyển phồn–giản (t2s) cố định, kèm `checksums.json`. Bảng lấy từ [OpenCC](https://github.com/BYVoid/OpenCC) 1.1.7 (BYVoid/OpenCC, giấy phép Apache 2.0); giữ nguyên nguồn và giấy phép khi phân phối lại.
 
 Mọi lệnh dưới đây chạy từ **thư mục gốc của repo**.
 
