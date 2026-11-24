@@ -68,6 +68,23 @@ Các bước của `colab_workflow` (môi trường, bundle dữ liệu, cache t
 2. Sửa biến `RUN` trong notebook thành thư mục run của chính bạn trên Drive (giá trị hiện có là đường dẫn run của người dựng notebook).
 3. Run all.
 
+## 5. Adapter đã huấn luyện
+
+Adapter chung hai chiều của đồ án (run 171.207 bước, LoRA r = 16, α = 32, `q_proj`/`v_proj`, 2.359.296 tham số) được đăng công khai tại [nhonguyen25/nllb-600m-vi-zh-lora](https://huggingface.co/nhonguyen25/nllb-600m-vi-zh-lora), kèm model card. Giấy phép CC-BY-NC 4.0 như NLLB-200: chỉ dùng cho nghiên cứu và học tập.
+
+```bash
+python scripts/download_assets.py --only lora      # tạo nllb_lora/adapter/ (revision ghim, kiểm SHA-256)
+```
+
+Điểm trên tập test (5.000 cặp mỗi chiều, beam 4, tối đa 256 token), báo riêng từng chiều:
+
+| Chiều | BLEU | chrF | COMET |
+|---|---|---|---|
+| Trung → Việt (`zho_Hans` → `vie_Latn`) | 29,91 | 49,26 | 0,8387 |
+| Việt → Trung (`vie_Latn` → `zho_Hans`) | 33,00 | 31,11 | 0,8201 |
+
+BLEU Việt → Trung dùng tokenizer `zh` và NFKC; Trung → Việt dùng `13a`. Hai chiều không trung bình với nhau. Bản dịch và điểm chi tiết: `results/lora/`. Dùng trong web app: `python -m app.server --lora-adapter nllb_lora/adapter` (xem [app/README.md](../app/README.md)).
+
 ## Kiểm thử
 
 ```bash

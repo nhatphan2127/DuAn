@@ -13,10 +13,14 @@ Giao diện web chạy local để dùng và so sánh các mô hình của đồ
 
 ```bash
 python scripts/download_assets.py --only checkpoint                      # lần đầu: checkpoint baseline
+python scripts/download_assets.py --only lora                            # tùy chọn: adapter LoRA -> nllb_lora/adapter/
 uv venv .venv-lora --python 3.12                                         # lần đầu: môi trường
 uv pip install --python .venv-lora/bin/python -r requirements-lora.txt
 .venv-lora/bin/python -m app.server                                       # mở http://127.0.0.1:8000
+.venv-lora/bin/python -m app.server --lora-adapter nllb_lora/adapter      # bật thêm mô hình `lora`
 ```
+
+Adapter LoRA: [nhonguyen25/nllb-600m-vi-zh-lora](https://huggingface.co/nhonguyen25/nllb-600m-vi-zh-lora) (công khai, phi thương mại). `--only lora` tải đúng revision đã ghim và kiểm SHA-256 từng file.
 
 `requirements-lora.txt` (gốc repo) đã gồm cả FastAPI/Uvicorn. Môi trường `.venv-lora` có sẵn torch, transformers, peft thì chỉ cần thêm `app/requirements.txt`.
 
