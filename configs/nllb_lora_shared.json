@@ -1,0 +1,193 @@
+{
+  "schema_version": 1,
+  "experiment": "nllb_600m_zhvi_shared_lora_r16_qv",
+  "status": "lora_requires_colab_qualification",
+  "model": {
+    "name_or_path": "facebook/nllb-200-distilled-600M",
+    "revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+    "tokenizer_revision": "f8d333a098d19b4fd9a8b18f94170487ad3f821d",
+    "method": "lora",
+    "source_language": "zho_Hans",
+    "target_language": "vie_Latn",
+    "lora": {
+      "r": 16,
+      "alpha": 32,
+      "dropout": 0.05,
+      "target_modules": [
+        "q_proj",
+        "v_proj"
+      ]
+    },
+    "directions": [
+      {
+        "name": "zh-vi",
+        "source_language": "zho_Hans",
+        "target_language": "vie_Latn"
+      },
+      {
+        "name": "vi-zh",
+        "source_language": "vie_Latn",
+        "target_language": "zho_Hans"
+      }
+    ]
+  },
+  "data": {
+    "frozen_root": "data/rebuild_20261016/frozen",
+    "manifest": "checksums.json",
+    "manifest_sha256_file": "checksums.json.sha256",
+    "expected_manifest_sha256": "d1b693a96406e64e0c3994bce910e8e5fafb07b16cf1c4e34cb0b92aaadc5c11",
+    "encoding": "utf-8",
+    "immutable": true,
+    "splits": {
+      "train": {
+        "source": "final/train.zh",
+        "target": "final/train.vi",
+        "expected_pairs": 913094
+      },
+      "val": {
+        "source": "final/val.zh",
+        "target": "final/val.vi",
+        "expected_pairs": 5000
+      },
+      "test": {
+        "source": "final/test.zh",
+        "target": "final/test.vi",
+        "expected_pairs": 5000
+      }
+    },
+    "accessible_preparation_splits": [
+      "train",
+      "val"
+    ],
+    "optimizer_training_split": "train",
+    "test_usage": "integrity_checks_and_final_evaluation_only",
+    "semantic_review": "not_performed",
+    "cache": {
+      "format": "arrow",
+      "map_batch_size": 256,
+      "num_proc": 1,
+      "padding": false
+    },
+    "max_source_tokens": 256,
+    "max_target_tokens": 256,
+    "overflow_policy": "fail_until_length_audit_decision",
+    "validation_reference": "full_original_text"
+  },
+  "training": {
+    "optim": "adamw_torch_fused",
+    "learning_rate": 0.0001,
+    "weight_decay": 0.01,
+    "lr_scheduler_type": "linear",
+    "warmup_ratio_proposal": 0.03,
+    "warmup_steps": null,
+    "num_train_epochs": 3,
+    "total_optimizer_steps": null,
+    "per_device_train_batch_size": 4,
+    "gradient_accumulation_steps": 8,
+    "per_device_eval_batch_size": 8,
+    "fp16": true,
+    "bf16": false,
+    "gradient_checkpointing": false,
+    "use_cache_during_training": false,
+    "max_grad_norm": 1.0,
+    "label_smoothing_factor": 0.0,
+    "seed": 42,
+    "data_seed": 42,
+    "dataloader_num_workers": 0,
+    "logging_steps": 25,
+    "eval_strategy": "steps",
+    "save_strategy": "steps",
+    "eval_steps": 20000,
+    "save_steps": 2000,
+    "eval_accumulation_steps": 8,
+    "predict_with_generate": true,
+    "metric_for_best_model": "chrf",
+    "greater_is_better": true,
+    "load_best_model_at_end": false,
+    "save_total_limit": 3,
+    "save_only_model": false,
+    "report_to": "none",
+    "early_stopping_patience": 3,
+    "early_stopping_threshold": 0.0,
+    "label_pad_token_id": -100,
+    "pad_to_multiple_of": 8,
+    "attn_implementation": "sdpa",
+    "tf32": false,
+    "group_by_length": false,
+    "best_model_reload_policy": "explicit_after_training"
+  },
+  "generation": {
+    "do_sample": false,
+    "num_beams": 4,
+    "forced_bos_language": null,
+    "max_new_tokens": 256,
+    "decoder_start_policy": "preserve_pretrained_convention",
+    "target_selection": "decoder_prompt_from_source_language"
+  },
+  "evaluation": {
+    "split": "val",
+    "expected_pairs": 5000,
+    "every_official_checkpoint": false,
+    "include_final_non_interval_step": true,
+    "pretrained_step_zero": true,
+    "bleu": {
+      "tokenize": "13a",
+      "lowercase": false
+    },
+    "chrf": {
+      "char_order": 6,
+      "word_order": 0,
+      "beta": 2,
+      "lowercase": false,
+      "whitespace": false
+    },
+    "independent_score_tolerance": 1e-06,
+    "comet_scope": "final_shared_evaluation_pipeline",
+    "every_optimizer_updates": 20000,
+    "scoring": {
+      "zh-vi": {
+        "bleu_tokenize": "13a",
+        "text_normalization": null
+      },
+      "vi-zh": {
+        "bleu_tokenize": "zh",
+        "text_normalization": "nfkc"
+      }
+    },
+    "aggregate": "mean"
+  },
+  "checkpoint": {
+    "local_run_root": "/content/runs",
+    "drive_run_root": null,
+    "require_full_training_state": true,
+    "require_hash_verification": true,
+    "completion_marker": "COMPLETE.json",
+    "drive_retention": [
+      "latest",
+      "previous",
+      "best"
+    ],
+    "stop_on_sync_failure": true,
+    "resume_unchanged_total_budget": true,
+    "inference_export_separate": true,
+    "preserve_all": true
+  },
+  "run": {
+    "run_id": null,
+    "phase": null,
+    "code_revision_or_snapshot_sha256": null,
+    "environment_fingerprint": null,
+    "cache_fingerprint": null,
+    "hyperparameters_locked": false,
+    "readiness_record": null,
+    "required_before_execution": [
+      "Verify frozen hashes/counts and pinned revisions",
+      "Verify PEFT/CUDA APIs and trainable module inventory",
+      "Measure LoRA speed, memory, long sequences and full validation",
+      "Pass fresh-process adapter/full-state resume probe",
+      "Use isolated LoRA experiment ID and Drive root; never resume full weights",
+      "Lock adapter/config before explicitly requesting final test",
+      "Compare per-direction validation chrF with the finished zh->vi adapter before selecting a model"
+    ]
+  }
+}

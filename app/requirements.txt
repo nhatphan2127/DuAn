@@ -1,0 +1,4 @@
+# Thêm vào môi trường .venv-lora (đã có torch, transformers, peft, sentencepiece, tokenizers):
+#   uv pip install --python .venv-lora/bin/python -r app/requirements.txt
+fastapi>=0.115
+uvicorn[standard]>=0.30

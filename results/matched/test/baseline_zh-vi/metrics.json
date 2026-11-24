@@ -1,0 +1,41 @@
+{
+  "bleu": 30.497813484523302,
+  "chrf": 49.75738346338623,
+  "count": 5000,
+  "empty_predictions": 0,
+  "reference_sha256": "9b1696e6cf48b6e866c83387c3544901b4c814dbe2a8047287d524489b513dc1",
+  "prediction_sha256": "62eb25aabcb2fcf4458eb7639e198bd0503e598d42a0c9d3ab17a589247a8556",
+  "signatures": {
+    "bleu": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.5.1",
+    "chrf": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.5.1"
+  },
+  "sacrebleu_version": "2.5.1",
+  "text_policy": "original full references; case-sensitive; SacreBLEU corpus normalization; chrF whitespace=False",
+  "text_normalization": null,
+  "chrf++_reference_only": 49.48387979587957,
+  "split": "test",
+  "direction": "zh-vi",
+  "scorer": "scripts/score_matched.py -> nllb_lora.eval.translation_metrics.score_translations",
+  "decode_info": {
+    "system": "transformer_baseline",
+    "checkpoint": "vi_zh_bidir/checkpoints/best_checkpoint.pt",
+    "direction": "zh-vi",
+    "split": "test",
+    "count": 5000,
+    "generation": {
+      "num_beams": 4,
+      "length_penalty": 1.0,
+      "length_penalty_style": "hf",
+      "max_new_tokens": 256,
+      "do_sample": false,
+      "source_truncation": false
+    },
+    "trained_max_len": 128,
+    "sources_over_max_source_tokens": 0,
+    "max_source_tokens": 256,
+    "generation_cap_count": 0,
+    "inference_precision": "fp32",
+    "device": "NVIDIA GeForce RTX 5060 Ti",
+    "elapsed_seconds": 956.0693668579988
+  }
+}

@@ -1,0 +1,3 @@
+# Giữ nguyên từng byte khi checkout (không đổi LF -> CRLF trên Windows).
+# Notebook Colab kiểm SHA-256 của ZIP mã nguồn và của score_comet.py, nên file phải khớp từng byte.
+* -text

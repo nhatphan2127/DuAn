@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dịch Việt ↔ Trung</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='80'>译</text></svg>">
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <header class="top">
+    <div class="brand">
+      <span class="logo" aria-hidden="true">译</span>
+      <div>
+        <h1>Dịch Việt ↔ Trung</h1>
+        <p class="sub">Transformer baseline · NLLB-600M · pivot qua tiếng Anh · LoRA</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist">
+    <button role="tab" class="tab active" data-view="translate" aria-selected="true">Dịch</button>
+    <button role="tab" class="tab" data-view="compare" aria-selected="false">So sánh mô hình</button>
+    <button role="tab" class="tab" data-view="batch" aria-selected="false">Dịch nhiều dòng / tệp</button>
+  </nav>
+
+  <main>
+    <!-- ============ DỊCH ============ -->
+    <section class="view" id="view-translate">
+      <div class="toolbar">
+        <div class="langbar">
+          <select id="t-source" aria-label="Ngôn ngữ nguồn">
+            <option value="auto">Tự nhận diện</option>
+            <option value="vi">Tiếng Việt</option>
+            <option value="zh">Tiếng Trung</option>
+          </select>
+          <button class="icon-btn" id="t-swap" title="Đảo chiều dịch" aria-label="Đảo chiều dịch">⇄</button>
+          <span class="target-label" id="t-target">Tiếng Trung</span>
+        </div>
+        <label class="model-pick">Mô hình
+          <select id="t-model" class="model-select"></select>
+        </label>
+      </div>
+
+      <div class="panes">
+        <div class="pane">
+          <textarea id="t-input" placeholder="Nhập câu tiếng Việt hoặc tiếng Trung…  (Ctrl+Enter để dịch)" spellcheck="false"></textarea>
+          <div class="pane-foot">
+            <span class="hint" id="t-detected"></span>
+            <span class="spacer"></span>
+            <span class="counter" id="t-count">0 / 5000</span>
+            <button class="icon-btn small" id="t-clear" title="Xóa" aria-label="Xóa">✕</button>
+          </div>
+        </div>
+        <div class="pane output">
+          <div class="out" id="t-output" aria-live="polite"><span class="placeholder">Bản dịch</span></div>
+          <details class="pivot" id="t-pivot" hidden>
+            <summary>Câu trung gian tiếng Anh</summary>
+            <div id="t-pivot-text"></div>
+          </details>
+          <div class="pane-foot">
+            <span class="hint" id="t-meta"></span>
+            <span class="spacer"></span>
+            <button class="icon-btn small" id="t-copy" title="Sao chép bản dịch" aria-label="Sao chép">⧉</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <label class="check"><input type="checkbox" id="t-auto" checked> Tự dịch khi ngừng gõ</label>
+        <span class="spacer"></span>
+        <button class="primary" id="t-go">Dịch</button>
+      </div>
+
+      <div class="examples">
+        <span>Ví dụ:</span>
+        <button class="chip" data-example="Tôi thích học trí tuệ nhân tạo.">Tôi thích học trí tuệ nhân tạo.</button>
+        <button class="chip" data-example="Hôm nay trời đẹp, chúng ta đi dạo công viên nhé!">Hôm nay trời đẹp, chúng ta đi dạo công viên nhé!</button>
+        <button class="chip" data-example="我喜欢学习人工智能。">我喜欢学习人工智能。</button>
+        <button class="chip" data-example="这家餐厅的菜很好吃，价格也很便宜。">这家餐厅的菜很好吃，价格也很便宜。</button>
+      </div>
+    </section>
+
+    <!-- ============ SO SÁNH ============ -->
+    <section class="view" id="view-compare" hidden>
+      <div class="toolbar">
+        <div class="langbar">
+          <select id="c-source" aria-label="Ngôn ngữ nguồn">
+            <option value="auto">Tự nhận diện</option>
+            <option value="vi">Tiếng Việt → Trung</option>
+            <option value="zh">Tiếng Trung → Việt</option>
+          </select>
+        </div>
+        <div class="model-checks" id="c-models"></div>
+      </div>
+      <div class="pane single">
+        <textarea id="c-input" rows="4" placeholder="Nhập câu cần so sánh giữa các mô hình…  (Ctrl+Enter)" spellcheck="false"></textarea>
+      </div>
+      <div class="actions">
+        <span class="hint">Điểm BLEU / chrF là kết quả trên tập test 5.000 câu (results/matched/test).</span>
+        <span class="spacer"></span>
+        <button class="primary" id="c-go">So sánh</button>
+      </div>
+      <div class="cards" id="c-results"></div>
+    </section>
+
+    <!-- ============ DỊCH TỆP ============ -->
+    <section class="view" id="view-batch" hidden>
+      <div class="toolbar">
+        <div class="langbar">
+          <select id="b-source" aria-label="Ngôn ngữ nguồn">
+            <option value="auto">Tự nhận diện từng dòng</option>
+            <option value="vi">Tiếng Việt → Trung</option>
+            <option value="zh">Tiếng Trung → Việt</option>
+          </select>
+        </div>
+        <label class="model-pick">Mô hình
+          <select id="b-model" class="model-select"></select>
+        </label>
+      </div>
+
+      <label class="drop" id="b-drop">
+        <input type="file" id="b-file" accept=".txt,text/plain" hidden>
+        <strong>Kéo thả tệp .txt vào đây</strong> hoặc bấm để chọn tệp — mỗi dòng được dịch riêng.
+        <span class="hint" id="b-file-name"></span>
+      </label>
+      <div class="pane single">
+        <textarea id="b-input" rows="6" placeholder="…hoặc dán nhiều dòng vào đây" spellcheck="false"></textarea>
+      </div>
+      <div class="actions">
+        <span class="hint" id="b-status"></span>
+        <span class="spacer"></span>
+        <button id="b-cancel" hidden>Dừng</button>
+        <button class="primary" id="b-go">Dịch tất cả</button>
+      </div>
+      <div class="progress" id="b-progress" hidden><div class="bar" id="b-bar"></div></div>
+      <div class="batch-result" id="b-result" hidden>
+        <div class="actions">
+          <span class="spacer"></span>
+          <button id="b-dl-txt">Tải bản dịch (.txt)</button>
+          <button id="b-dl-tsv">Tải song ngữ (.tsv)</button>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>#</th><th>Nguồn</th><th>Bản dịch</th></tr></thead>
+            <tbody id="b-rows"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tùy chọn giải mã dùng chung cho cả ba chế độ -->
+    <details class="settings">
+      <summary>Tùy chọn giải mã</summary>
+      <div class="settings-grid">
+        <label>Beam size <output id="o-beam">4</output>
+          <input type="range" id="s-beam" min="1" max="8" value="4">
+        </label>
+        <label>Số token sinh tối đa <output id="o-max">256</output>
+          <input type="range" id="s-max" min="16" max="512" step="16" value="256">
+        </label>
+        <p class="hint">Mặc định (beam 4, 256 token) trùng với thiết lập lúc chấm điểm trên tập test. Beam 1 = greedy, nhanh hơn.</p>
+      </div>
+    </details>
+
+    <section class="model-status">
+      <h2>Trạng thái mô hình</h2>
+      <ul id="m-status"></ul>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script src="/static/app.js"></script>
+</body>
+</html>

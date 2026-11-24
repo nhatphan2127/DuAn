@@ -1,0 +1,58 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Môi trường ảo (uv): .venv cho baseline, .venv-lora cho NLLB/LoRA + app
+.venv/
+.venv-lora/
+.env
+
+# Model checkpoint (hàng trăm MB - GB, vượt giới hạn GitHub) -> tải bằng scripts/download_assets.py
+*.pt
+*.pth
+*.bin
+*.safetensors
+**/checkpoints/
+
+# Thư mục model đã train: chỉ giữ tokenizer, config, log, hình (nhẹ); checkpoint bị bỏ qua ở trên
+# vi_zh_bidir/ được đưa lên git vì app cần tokenizer_joint.model
+vi_zh_translation/
+zh_vi_translation/
+
+# Dữ liệu train lớn (train.vi ~113 MB > giới hạn 100 MB của GitHub) -> scripts/download_assets.py
+data/train.*
+data/rebuild_20261016/
+# Đầu vào/trung gian của data_pipeline (không có trong repo, xem data_pipeline/README.md)
+data/raw/
+data/benchmark/
+data/processed/
+data/final/
+data/snapshots/
+data/tools/
+reports/
+input_manifest.json
+
+# File đóng gói (ZIP mã nguồn cho Colab, asset của GitHub Release)
+dist/
+
+# Logs tạm
+*.log
+
+# Báo cáo Word (file nhị phân lớn, bản sao lưu, file khóa của Word)
+*.docx
+~$*
+
+# Editor / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Tài liệu markdown nội bộ, chỉ giữ README
+*.md
+!README.md

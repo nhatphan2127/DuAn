@@ -1,0 +1,20 @@
+{
+  "bleu": 27.088607610303015,
+  "chrf": 46.85426122194873,
+  "count": 5000,
+  "empty_predictions": 1,
+  "reference_sha256": "9b1696e6cf48b6e866c83387c3544901b4c814dbe2a8047287d524489b513dc1",
+  "prediction_sha256": "75310ec1a1c224d4dac697b11a350aae9935e49494a22a902f8dd2751faa6433",
+  "signatures": {
+    "bleu": "nrefs:1|case:mixed|eff:no|tok:13a|smooth:exp|version:2.5.1",
+    "chrf": "nrefs:1|case:mixed|eff:yes|nc:6|nw:0|space:no|version:2.5.1"
+  },
+  "sacrebleu_version": "2.5.1",
+  "text_policy": "original full references; case-sensitive; SacreBLEU corpus normalization; chrF whitespace=False",
+  "text_normalization": null,
+  "chrf++_reference_only": 46.52251248164204,
+  "split": "test",
+  "direction": "zh-vi",
+  "scorer": "scripts/score_matched.py -> nllb_lora.eval.translation_metrics.score_translations",
+  "decode_info": {}
+}

@@ -1,0 +1,39 @@
+{
+  "status": "COMPLETE",
+  "phase": "full",
+  "experiment_id": "shared-lora-a100-40-t4-e4-901c4fc12e",
+  "bleu": 31.789337141891465,
+  "chrf": 40.482376888502166,
+  "count": 10000,
+  "best_model": "/content/drive/MyDrive/DACNTT-lora/run-all/shared-lora-a100-40-t4-e4-901c4fc12e/artifacts/full/best_model",
+  "results": "/content/drive/MyDrive/DACNTT-lora/run-all/shared-lora-a100-40-t4-e4-901c4fc12e",
+  "fresh_runtime_resume_acceptance": "NOT_ESTABLISHED_BY_RUN_ALL",
+  "validation_directions": {
+    "zh-vi": {
+      "bleu": 30.330870592813778,
+      "chrf": 49.63761408758873,
+      "count": 5000
+    },
+    "vi-zh": {
+      "bleu": 33.24780369096916,
+      "chrf": 31.327139689415606,
+      "count": 5000
+    }
+  },
+  "test_bleu": 31.45794373065566,
+  "test_chrf": 40.18644770919587,
+  "test_count": 10000,
+  "test_results": "/content/drive/MyDrive/DACNTT-lora/run-all/shared-lora-a100-40-t4-e4-901c4fc12e/artifacts",
+  "test_directions": {
+    "full-test-zh-vi": {
+      "bleu": 29.914099754643544,
+      "chrf": 49.26418683508732,
+      "count": 5000
+    },
+    "full-test-vi-zh": {
+      "bleu": 33.00178770666778,
+      "chrf": 31.108708583304416,
+      "count": 5000
+    }
+  }
+}

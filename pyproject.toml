@@ -1,0 +1,27 @@
+[project]
+name = "vi-zh-nmt"
+version = "0.1.0"
+description = "Dịch máy Việt <-> Trung bằng Transformer tự cài đặt"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "torch>=2.7",          # >=2.7 mới hỗ trợ GPU Blackwell (RTX 50xx)
+    "tokenizers",
+    "sacrebleu",
+    "numpy",
+    "tqdm",
+    "sentencepiece>=0.2.2",
+    "unbabel-comet>=2.2",  # độ đo COMET (evaluate.py)
+]
+
+[tool.uv]
+package = false
+
+# Lấy torch bản CUDA 12.8 thay vì bản mặc định trên PyPI
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128" }]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true

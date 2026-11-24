@@ -1,0 +1,27 @@
+# Môi trường .venv-lora: NLLB-600M (dịch thẳng, pivot, LoRA), chấm điểm matched, web app và test.
+# Phiên bản khớp với lúc chạy kết quả trong results/ (xem nllb_lora/requirements-colab.lock).
+#   uv venv .venv-lora --python 3.12
+#   uv pip install --python .venv-lora/bin/python -r requirements-lora.txt
+# Linux: torch trên PyPI đã kèm CUDA 12.x. Windows cần thêm
+#   --extra-index-url https://download.pytorch.org/whl/cu128
+torch==2.8.0
+transformers==4.57.1
+datasets==4.2.0
+accelerate==1.10.1
+peft==0.17.1
+sentencepiece==0.2.1
+sacrebleu==2.5.1
+tokenizers
+safetensors
+protobuf
+numpy
+tqdm
+psutil
+
+# Web app (app/)
+fastapi>=0.115
+uvicorn[standard]>=0.30
+
+# Test
+pytest
+httpx

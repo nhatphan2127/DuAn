@@ -1,0 +1,5 @@
+# torch, numpy, tqdm đã có sẵn trên Colab
+tokenizers
+sentencepiece
+sacrebleu
+unbabel-comet

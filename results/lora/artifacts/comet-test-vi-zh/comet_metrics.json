@@ -1,0 +1,17 @@
+{
+  "comet": 0.8201298816561698,
+  "count": 5000,
+  "model": "Unbabel/wmt22-comet-da",
+  "revision": "2760a223ac957f30acfb18c8aa649b01cf1d75f2",
+  "comet_version": "2.2.7",
+  "batch_size": 32,
+  "gpus": 1,
+  "elapsed_seconds": 119.74617189900005,
+  "split": "test",
+  "direction": "vi-zh",
+  "text_normalization": "nfkc",
+  "prediction_sha256": "23c2a584ec3c85e57abe49eee227a546302ea357c6e20bf312b832c2c57eb44f",
+  "reference_sha256": "6448cff694220e019b9a451f629b57ee3887e080d9789c61446a64d8c6aa4b15",
+  "source_sha256": "40193dc271a93172d3ff16120f3d173b25aebbb7b3b0f891d70c29ccc253b676",
+  "empty_predictions": 2
+}

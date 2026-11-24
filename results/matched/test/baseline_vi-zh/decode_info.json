@@ -1,0 +1,22 @@
+{
+  "system": "transformer_baseline",
+  "checkpoint": "vi_zh_bidir/checkpoints/best_checkpoint.pt",
+  "direction": "vi-zh",
+  "split": "test",
+  "count": 5000,
+  "generation": {
+    "num_beams": 4,
+    "length_penalty": 1.0,
+    "length_penalty_style": "hf",
+    "max_new_tokens": 256,
+    "do_sample": false,
+    "source_truncation": false
+  },
+  "trained_max_len": 128,
+  "sources_over_max_source_tokens": 0,
+  "max_source_tokens": 256,
+  "generation_cap_count": 3,
+  "inference_precision": "fp32",
+  "device": "NVIDIA GeForce RTX 5060 Ti",
+  "elapsed_seconds": 660.7386543290049
+}
