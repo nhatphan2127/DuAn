@@ -20,7 +20,7 @@ Mã nguồn đồ án *Nghiên cứu và đánh giá hiệu quả của mô hìn
 | NLLB-600M + LoRA | 33,00 / 31,11 / 0,8201 | 29,91 / 49,26 / 0,8387 |
 | NLLB-600M pivot | 26,84 / 25,53 / 0,7860 | 26,83 / 46,34 / 0,8201 |
 
-Bản dịch và điểm chi tiết: `results/matched/test/` (baseline, dịch thẳng, pivot) và `results/lora/` (LoRA). Kiểm định paired bootstrap và điểm theo độ dài câu: `results/matched/test/deep_eval.json`.
+Bản dịch và điểm chi tiết: `results/matched/test/` (baseline, dịch thẳng, pivot) và `results/lora/` (LoRA; `results/matched/test/lora_*/metrics.json` là bản sao điểm test của LoRA để web app hiển thị). Kiểm định paired bootstrap và điểm theo độ dài câu: `results/matched/test/deep_eval.json`.
 
 ## Cấu trúc repo
 
